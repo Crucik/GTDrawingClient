@@ -59,7 +59,7 @@
       <bool>true</bool>
      </property>
      <property name="rowCount">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="columnCount">
       <number>6</number>
@@ -67,8 +67,6 @@
      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
       <bool>false</bool>
      </attribute>
-     <row/>
-     <row/>
      <column/>
      <column/>
      <column/>

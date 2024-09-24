@@ -1,9 +1,9 @@
 #pragma once
 
+#include "qcustomgraphicsitem.h"
 #include "qudpsocket.h"
 #include <QObject>
 #include <QNetworkDatagram>
-#include <qgraphicsitem.h>
 
 
 class UDPReciever : public QObject
@@ -19,10 +19,6 @@ class UDPReciever : public QObject
         void readPendingDatagrams();
 
     signals:
-//        void sendRect(QRect rect, QString color);
-//        void sendEllipse(QRect rect, QString color);
-//        void sendTriangle(QPolygon poly, QString color);
-//        void sendLine(QLine line, QString color);
         void sendFigure(QGraphicsItem  *item);
 
     private:

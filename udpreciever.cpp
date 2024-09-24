@@ -23,19 +23,17 @@ void UDPReciever::processTheDatagram(QNetworkDatagram datagram){
         if (auto figureContainer = GetRoot<Figure>(datagram.data().data())){ //datagram.qbytearray.ptr
             if (!figureContainer->payload()) return;
             switch(figureContainer->type()){
+            static int id = 0;
             case FigureType::FigureType_Rect:
             {
                 qDebug("sending rectangle");
                 auto fig = GetRoot<RectData>(figureContainer->payload()->data()); //messageString.payload.ptr.... why? o.O
 
-                /*
-                emit sendRect(QRect(fig->x(),fig->y(),fig->width(),fig->height()),
-                                fig->color_hex()->c_str());
-                */
-
-                QGraphicsRectItem *newRect = new QGraphicsRectItem(QRect(fig->x(),fig->y(),fig->width(),fig->height())); //utechka?
-                newRect->setBrush(QBrush(QColor(fig->color_hex()->c_str())));
-                emit sendFigure(newRect);
+                QGraphicsRectItem *newFigure = new QGraphicsRectItem(QRect(fig->x(),fig->y(),fig->width(),fig->height())); //utechka?
+                newFigure->setBrush(QBrush(QColor(fig->color_hex()->c_str())));
+                newFigure->setData(0,id++);
+                newFigure->setData(1,"Rectangle");
+                emit sendFigure(newFigure);
 
             }
             break;
@@ -44,14 +42,11 @@ void UDPReciever::processTheDatagram(QNetworkDatagram datagram){
                 qDebug("sending ellipse");
                 auto fig = GetRoot<EllipseData>(figureContainer->payload()->data());
 
-                /*
-                emit sendEllipse(QRect(fig->x(),fig->y(),fig->r1(),fig->r2()),
-                                fig->color_hex()->c_str());
-                */
-
-                QGraphicsEllipseItem *newEllipse = new QGraphicsEllipseItem(QRect(fig->x(),fig->y(),fig->r1(),fig->r2()));
-                newEllipse->setBrush(QBrush(QColor(fig->color_hex()->c_str())));
-                emit sendFigure(newEllipse);
+                QGraphicsEllipseItem *newFigure = new QGraphicsEllipseItem(QRect(fig->x(),fig->y(),fig->r1(),fig->r2()));
+                newFigure->setBrush(QBrush(QColor(fig->color_hex()->c_str())));
+                newFigure->setData(0,id++);
+                newFigure->setData(1,"Ellipse");
+                emit sendFigure(newFigure);
             }
             break;
             case FigureType::FigureType_Triangle:
@@ -63,14 +58,11 @@ void UDPReciever::processTheDatagram(QNetworkDatagram datagram){
                 triang.append(QPoint(fig->x2(),fig->y2()));
                 triang.append(QPoint(fig->x3(),fig->y3()));
 
-                /*
-                emit sendTriangle(triang,
-                                  fig->color_hex()->c_str());
-                */
-
-                QGraphicsPolygonItem *newTriang = new QGraphicsPolygonItem(triang);
-                newTriang->setBrush(QBrush(QColor(fig->color_hex()->c_str())));
-                emit sendFigure(newTriang);
+                QGraphicsPolygonItem *newFigure = new QGraphicsPolygonItem(triang);
+                newFigure->setBrush(QBrush(QColor(fig->color_hex()->c_str())));
+                newFigure->setData(0,id++);
+                newFigure->setData(1,"Triangle");
+                emit sendFigure(newFigure);
 
             }
             break;
@@ -79,15 +71,11 @@ void UDPReciever::processTheDatagram(QNetworkDatagram datagram){
                 qDebug("sending line");
                 auto fig = GetRoot<LineData>(figureContainer->payload()->data());
 
-                /*
-                emit sendLine(QLine//.by оффают сессию в 4 утра. 2/10
-                              (fig->x1(),fig->y1(),fig->x2(),fig->y2()),
-                              fig->color_hex()->c_str());
-                */
-
-                QGraphicsLineItem *newLine = new QGraphicsLineItem(fig->x1(),fig->y1(),fig->x2(),fig->y2());
-                newLine->setPen(QPen(QColor(fig->color_hex()->c_str())));
-                emit sendFigure(newLine);
+                QGraphicsLineItem *newFigure = new QGraphicsLineItem(fig->x1(),fig->y1(),fig->x2(),fig->y2());
+                newFigure->setPen(QPen(QColor(fig->color_hex()->c_str())));
+                newFigure->setData(0,id++);
+                newFigure->setData(1,"Line");
+                emit sendFigure(newFigure);
             }
             break;
             default:

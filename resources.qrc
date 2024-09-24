@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/resources/tableWidget">
+        <file>remove.jpg</file>
+        <file>hide.jpg</file>
+    </qresource>
+</RCC>

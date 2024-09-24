@@ -14,10 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     , graphicsWidget(new GraphicsWidget)
     , tableWidget(new TableWidget)
 {
-//    connect(udpReciever,&UDPReciever::sendRect,this,&MainWindow::addRect);
-//    connect(udpReciever,&UDPReciever::sendEllipse,this,&MainWindow::addEllipse);
-//    connect(udpReciever,&UDPReciever::sendTriangle,this,&MainWindow::addTriangle);
-//    connect(udpReciever,&UDPReciever::sendLine,this,&MainWindow::addLine);
 
     //Setup widgets
     ////mainWindow signals
@@ -49,22 +45,6 @@ MainWindow::MainWindow(QWidget *parent)
     //
 }
 
-//void MainWindow::addRect(QRect rect, QString color){
-//    QGraphicsRectItem *newrect = scene->addRect(rect);
-//    newrect->setBrush(QBrush(QColor(color)));
-//}
-//void MainWindow::addEllipse(QRect rect, QString color){ // treating ellipse like rectangle (width=r1;height=r2)
-//    QGraphicsEllipseItem *newrect = scene->addEllipse(rect);
-//    newrect->setBrush(QBrush(QColor(color)));
-//}
-//void MainWindow::addLine(QLine line, QString color){
-//    QGraphicsLineItem *newline = scene->addLine(line);
-//    newline->setPen(QPen(QColor(color)));
-//}
-//void MainWindow::addTriangle(QPolygon poly, QString color){
-//    QGraphicsPolygonItem *newpoly = scene->addPolygon(poly);
-//    newpoly->setBrush(QBrush(QColor(color)));
-//}
 void MainWindow::addItem(QGraphicsItem  *item){
     emit newItem(item);
 }

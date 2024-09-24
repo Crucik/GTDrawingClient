@@ -18,9 +18,9 @@ public:
     ~GraphicsWidget();
 
 public slots:
-    void addItem (QGraphicsItem *item) {scene->addItem(item);};
-    void removeItem (QGraphicsItem *item){scene->removeItem(item);};
-    void toggleItemVisibility (QGraphicsItem *item){};//TODO
+    void addItem (QGraphicsItem *item);;
+    void removeItem (QGraphicsItem *item);;
+    void toggleItemVisibility(QGraphicsItem *item); // TODO
 
 signals:
     void removeItemEvent(QGraphicsItem *item);

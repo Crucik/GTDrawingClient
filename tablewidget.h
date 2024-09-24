@@ -1,7 +1,7 @@
-#ifndef TABLEWIDGET_H
-#define TABLEWIDGET_H
+#pragma once
 
 #include <QGraphicsItem>
+#include <QPushButton>
 #include <QWidget>
 
 namespace Ui {
@@ -17,10 +17,10 @@ public:
     ~TableWidget();
 
 public slots:
-    void addItem (QGraphicsItem *item) {};
-    void removeItem (QGraphicsItem *item){};
-    void toggleItemVisibility (QGraphicsItem *item){};
-    void updateItemPosition (QGraphicsItem *item){};
+    void addItem (QGraphicsItem *item);
+    void removeItem (QGraphicsItem *item);
+    void toggleItemVisibility (QGraphicsItem *item);
+    void updateItemPosition (QGraphicsItem *item);
 
 signals:
     void removeItemEvent(QGraphicsItem *item);
@@ -28,7 +28,7 @@ signals:
 
 
 private:
+    void updateLocationHelper(QGraphicsItem *item, const int row);
+    void hideIconHelper(QPushButton *button, bool transparent = true);
     Ui::TableWidget *ui;
 };
-
-#endif // TABLEWIDGET_H
