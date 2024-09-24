@@ -1,8 +1,8 @@
-# QTDrawingClient
+# QtDrawingClient
 #### _Simple Qt app to get shapes from udp message, draw them, dispay their info and redact them._
 
 ## Build requirements
-- Qtcreator
+- QtCreator
 - Qt6.4.3
 
 ## Build dependencies
