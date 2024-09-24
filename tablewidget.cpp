@@ -13,8 +13,8 @@ TableWidget::TableWidget(QWidget *parent) :
                                                              << "Type"
                                                              << "Position"
                                                              << "Region"
-                                                             << "Hide"
-                                                             << "Remove");
+                                                             << "Remove"
+                                                             << "Hide");
 }
 
 
@@ -44,7 +44,7 @@ void TableWidget::addItem(QGraphicsItem *item) {
     //link buttons
     connect(removeBtn,&QPushButton::clicked,this,[item,this](){this->removeItem(item);});
     connect(removeBtn,&QPushButton::clicked,this,[item,this](){this->removeItemEvent(item);});
-    connect(hideBtn,&QPushButton::clicked,this,[hideBtn,this](){this->hideIconHelper(hideBtn);});
+    connect(hideBtn,&QPushButton::clicked,this,[hideBtn,this,item](){this->hideIconHelper(hideBtn,item->isVisible());});
     connect(hideBtn,&QPushButton::clicked,this,[item,this](){this->toggleItemVisibilityEvent(item);});
 
     //display buttons
