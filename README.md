@@ -7,3 +7,8 @@
 
 ## Build dependencies
 - flatbuffers 23.1.21 (submodule included)
+####In flatbuffers directory:
+```sh
+cmake .
+make . -g6
+```
