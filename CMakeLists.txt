@@ -12,8 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 
+#------------
+
 set(PROJECT_SOURCES
-        api_generated.h
         main.cpp
         mainwindow.cpp mainwindow.h mainwindow.ui
         udpreciever.cpp udpreciever.h
@@ -22,6 +23,20 @@ set(PROJECT_SOURCES
         # qcustomgraphicsitem.h qcustomgraphicsitem.cpp
         resources.qrc
 )
+
+
+
+#Flatbuffers Api autogen
+set(FLATC_EXEC "${CMAKE_SOURCE_DIR}/3rd-party/flatbuffers-23.1.21/flatc")
+
+add_custom_command(
+    OUTPUT "${CMAKE_SOURCE_DIR}/api_generated.h"
+    COMMAND ${FLATC_EXEC} --cpp --gen-object-api -o "${CMAKE_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/Server/api.fbs"
+    DEPENDS "${CMAKE_SOURCE_DIR}/Server/api.fbs"
+    COMMENT "Генерация API для FlatBuffers"
+)
+
+#
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(QtDrawingClient
@@ -64,6 +79,11 @@ install(TARGETS QtDrawingClient
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(QtDrawingClient)
 endif()
+
+add_custom_target(apigen DEPENDS "${CMAKE_SOURCE_DIR}/api_generated.h")
+add_dependencies(QtDrawingClient apigen)
+

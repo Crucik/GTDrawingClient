@@ -15,18 +15,23 @@ static_assert(FLATBUFFERS_VERSION_MAJOR == 23 &&
 
 struct Figure;
 struct FigureBuilder;
+struct FigureT;
 
 struct RectData;
 struct RectDataBuilder;
+struct RectDataT;
 
 struct EllipseData;
 struct EllipseDataBuilder;
+struct EllipseDataT;
 
 struct TriangleData;
 struct TriangleDataBuilder;
+struct TriangleDataT;
 
 struct LineData;
 struct LineDataBuilder;
+struct LineDataT;
 
 enum FigureType : uint16_t {
   FigureType_Rect = 0,
@@ -64,7 +69,14 @@ inline const char *EnumNameFigureType(FigureType e) {
   return EnumNamesFigureType()[index];
 }
 
+struct FigureT : public ::flatbuffers::NativeTable {
+  typedef Figure TableType;
+  FigureType type = FigureType_Rect;
+  std::string payload{};
+};
+
 struct Figure FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef FigureT NativeTableType;
   typedef FigureBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_TYPE = 4,
@@ -83,6 +95,9 @@ struct Figure FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
            verifier.VerifyString(payload()) &&
            verifier.EndTable();
   }
+  FigureT *UnPack(const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  void UnPackTo(FigureT *_o, const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  static ::flatbuffers::Offset<Figure> Pack(::flatbuffers::FlatBufferBuilder &_fbb, const FigureT* _o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
 };
 
 struct FigureBuilder {
@@ -127,7 +142,19 @@ inline ::flatbuffers::Offset<Figure> CreateFigureDirect(
       payload__);
 }
 
+::flatbuffers::Offset<Figure> CreateFigure(::flatbuffers::FlatBufferBuilder &_fbb, const FigureT *_o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
+
+struct RectDataT : public ::flatbuffers::NativeTable {
+  typedef RectData TableType;
+  int32_t x = 0;
+  int32_t y = 0;
+  int32_t width = 0;
+  int32_t height = 0;
+  std::string color_hex{};
+};
+
 struct RectData FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef RectDataT NativeTableType;
   typedef RectDataBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_X = 4,
@@ -161,6 +188,9 @@ struct RectData FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
            verifier.VerifyString(color_hex()) &&
            verifier.EndTable();
   }
+  RectDataT *UnPack(const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  void UnPackTo(RectDataT *_o, const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  static ::flatbuffers::Offset<RectData> Pack(::flatbuffers::FlatBufferBuilder &_fbb, const RectDataT* _o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
 };
 
 struct RectDataBuilder {
@@ -226,7 +256,19 @@ inline ::flatbuffers::Offset<RectData> CreateRectDataDirect(
       color_hex__);
 }
 
+::flatbuffers::Offset<RectData> CreateRectData(::flatbuffers::FlatBufferBuilder &_fbb, const RectDataT *_o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
+
+struct EllipseDataT : public ::flatbuffers::NativeTable {
+  typedef EllipseData TableType;
+  int32_t x = 0;
+  int32_t y = 0;
+  int32_t r1 = 0;
+  int32_t r2 = 0;
+  std::string color_hex{};
+};
+
 struct EllipseData FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef EllipseDataT NativeTableType;
   typedef EllipseDataBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_X = 4,
@@ -260,6 +302,9 @@ struct EllipseData FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
            verifier.VerifyString(color_hex()) &&
            verifier.EndTable();
   }
+  EllipseDataT *UnPack(const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  void UnPackTo(EllipseDataT *_o, const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  static ::flatbuffers::Offset<EllipseData> Pack(::flatbuffers::FlatBufferBuilder &_fbb, const EllipseDataT* _o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
 };
 
 struct EllipseDataBuilder {
@@ -325,7 +370,21 @@ inline ::flatbuffers::Offset<EllipseData> CreateEllipseDataDirect(
       color_hex__);
 }
 
+::flatbuffers::Offset<EllipseData> CreateEllipseData(::flatbuffers::FlatBufferBuilder &_fbb, const EllipseDataT *_o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
+
+struct TriangleDataT : public ::flatbuffers::NativeTable {
+  typedef TriangleData TableType;
+  int32_t x1 = 0;
+  int32_t y1 = 0;
+  int32_t x2 = 0;
+  int32_t y2 = 0;
+  int32_t x3 = 0;
+  int32_t y3 = 0;
+  std::string color_hex{};
+};
+
 struct TriangleData FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef TriangleDataT NativeTableType;
   typedef TriangleDataBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_X1 = 4,
@@ -369,6 +428,9 @@ struct TriangleData FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
            verifier.VerifyString(color_hex()) &&
            verifier.EndTable();
   }
+  TriangleDataT *UnPack(const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  void UnPackTo(TriangleDataT *_o, const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  static ::flatbuffers::Offset<TriangleData> Pack(::flatbuffers::FlatBufferBuilder &_fbb, const TriangleDataT* _o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
 };
 
 struct TriangleDataBuilder {
@@ -448,7 +510,19 @@ inline ::flatbuffers::Offset<TriangleData> CreateTriangleDataDirect(
       color_hex__);
 }
 
+::flatbuffers::Offset<TriangleData> CreateTriangleData(::flatbuffers::FlatBufferBuilder &_fbb, const TriangleDataT *_o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
+
+struct LineDataT : public ::flatbuffers::NativeTable {
+  typedef LineData TableType;
+  int32_t x1 = 0;
+  int32_t y1 = 0;
+  int32_t x2 = 0;
+  int32_t y2 = 0;
+  std::string color_hex{};
+};
+
 struct LineData FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
+  typedef LineDataT NativeTableType;
   typedef LineDataBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_X1 = 4,
@@ -482,6 +556,9 @@ struct LineData FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
            verifier.VerifyString(color_hex()) &&
            verifier.EndTable();
   }
+  LineDataT *UnPack(const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  void UnPackTo(LineDataT *_o, const ::flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  static ::flatbuffers::Offset<LineData> Pack(::flatbuffers::FlatBufferBuilder &_fbb, const LineDataT* _o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
 };
 
 struct LineDataBuilder {
@@ -545,6 +622,195 @@ inline ::flatbuffers::Offset<LineData> CreateLineDataDirect(
       x2,
       y2,
       color_hex__);
+}
+
+::flatbuffers::Offset<LineData> CreateLineData(::flatbuffers::FlatBufferBuilder &_fbb, const LineDataT *_o, const ::flatbuffers::rehasher_function_t *_rehasher = nullptr);
+
+inline FigureT *Figure::UnPack(const ::flatbuffers::resolver_function_t *_resolver) const {
+  auto _o = std::unique_ptr<FigureT>(new FigureT());
+  UnPackTo(_o.get(), _resolver);
+  return _o.release();
+}
+
+inline void Figure::UnPackTo(FigureT *_o, const ::flatbuffers::resolver_function_t *_resolver) const {
+  (void)_o;
+  (void)_resolver;
+  { auto _e = type(); _o->type = _e; }
+  { auto _e = payload(); if (_e) _o->payload = _e->str(); }
+}
+
+inline ::flatbuffers::Offset<Figure> Figure::Pack(::flatbuffers::FlatBufferBuilder &_fbb, const FigureT* _o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  return CreateFigure(_fbb, _o, _rehasher);
+}
+
+inline ::flatbuffers::Offset<Figure> CreateFigure(::flatbuffers::FlatBufferBuilder &_fbb, const FigureT *_o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  (void)_rehasher;
+  (void)_o;
+  struct _VectorArgs { ::flatbuffers::FlatBufferBuilder *__fbb; const FigureT* __o; const ::flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
+  auto _type = _o->type;
+  auto _payload = _o->payload.empty() ? 0 : _fbb.CreateString(_o->payload);
+  return CreateFigure(
+      _fbb,
+      _type,
+      _payload);
+}
+
+inline RectDataT *RectData::UnPack(const ::flatbuffers::resolver_function_t *_resolver) const {
+  auto _o = std::unique_ptr<RectDataT>(new RectDataT());
+  UnPackTo(_o.get(), _resolver);
+  return _o.release();
+}
+
+inline void RectData::UnPackTo(RectDataT *_o, const ::flatbuffers::resolver_function_t *_resolver) const {
+  (void)_o;
+  (void)_resolver;
+  { auto _e = x(); _o->x = _e; }
+  { auto _e = y(); _o->y = _e; }
+  { auto _e = width(); _o->width = _e; }
+  { auto _e = height(); _o->height = _e; }
+  { auto _e = color_hex(); if (_e) _o->color_hex = _e->str(); }
+}
+
+inline ::flatbuffers::Offset<RectData> RectData::Pack(::flatbuffers::FlatBufferBuilder &_fbb, const RectDataT* _o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  return CreateRectData(_fbb, _o, _rehasher);
+}
+
+inline ::flatbuffers::Offset<RectData> CreateRectData(::flatbuffers::FlatBufferBuilder &_fbb, const RectDataT *_o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  (void)_rehasher;
+  (void)_o;
+  struct _VectorArgs { ::flatbuffers::FlatBufferBuilder *__fbb; const RectDataT* __o; const ::flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
+  auto _x = _o->x;
+  auto _y = _o->y;
+  auto _width = _o->width;
+  auto _height = _o->height;
+  auto _color_hex = _o->color_hex.empty() ? 0 : _fbb.CreateString(_o->color_hex);
+  return CreateRectData(
+      _fbb,
+      _x,
+      _y,
+      _width,
+      _height,
+      _color_hex);
+}
+
+inline EllipseDataT *EllipseData::UnPack(const ::flatbuffers::resolver_function_t *_resolver) const {
+  auto _o = std::unique_ptr<EllipseDataT>(new EllipseDataT());
+  UnPackTo(_o.get(), _resolver);
+  return _o.release();
+}
+
+inline void EllipseData::UnPackTo(EllipseDataT *_o, const ::flatbuffers::resolver_function_t *_resolver) const {
+  (void)_o;
+  (void)_resolver;
+  { auto _e = x(); _o->x = _e; }
+  { auto _e = y(); _o->y = _e; }
+  { auto _e = r1(); _o->r1 = _e; }
+  { auto _e = r2(); _o->r2 = _e; }
+  { auto _e = color_hex(); if (_e) _o->color_hex = _e->str(); }
+}
+
+inline ::flatbuffers::Offset<EllipseData> EllipseData::Pack(::flatbuffers::FlatBufferBuilder &_fbb, const EllipseDataT* _o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  return CreateEllipseData(_fbb, _o, _rehasher);
+}
+
+inline ::flatbuffers::Offset<EllipseData> CreateEllipseData(::flatbuffers::FlatBufferBuilder &_fbb, const EllipseDataT *_o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  (void)_rehasher;
+  (void)_o;
+  struct _VectorArgs { ::flatbuffers::FlatBufferBuilder *__fbb; const EllipseDataT* __o; const ::flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
+  auto _x = _o->x;
+  auto _y = _o->y;
+  auto _r1 = _o->r1;
+  auto _r2 = _o->r2;
+  auto _color_hex = _o->color_hex.empty() ? 0 : _fbb.CreateString(_o->color_hex);
+  return CreateEllipseData(
+      _fbb,
+      _x,
+      _y,
+      _r1,
+      _r2,
+      _color_hex);
+}
+
+inline TriangleDataT *TriangleData::UnPack(const ::flatbuffers::resolver_function_t *_resolver) const {
+  auto _o = std::unique_ptr<TriangleDataT>(new TriangleDataT());
+  UnPackTo(_o.get(), _resolver);
+  return _o.release();
+}
+
+inline void TriangleData::UnPackTo(TriangleDataT *_o, const ::flatbuffers::resolver_function_t *_resolver) const {
+  (void)_o;
+  (void)_resolver;
+  { auto _e = x1(); _o->x1 = _e; }
+  { auto _e = y1(); _o->y1 = _e; }
+  { auto _e = x2(); _o->x2 = _e; }
+  { auto _e = y2(); _o->y2 = _e; }
+  { auto _e = x3(); _o->x3 = _e; }
+  { auto _e = y3(); _o->y3 = _e; }
+  { auto _e = color_hex(); if (_e) _o->color_hex = _e->str(); }
+}
+
+inline ::flatbuffers::Offset<TriangleData> TriangleData::Pack(::flatbuffers::FlatBufferBuilder &_fbb, const TriangleDataT* _o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  return CreateTriangleData(_fbb, _o, _rehasher);
+}
+
+inline ::flatbuffers::Offset<TriangleData> CreateTriangleData(::flatbuffers::FlatBufferBuilder &_fbb, const TriangleDataT *_o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  (void)_rehasher;
+  (void)_o;
+  struct _VectorArgs { ::flatbuffers::FlatBufferBuilder *__fbb; const TriangleDataT* __o; const ::flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
+  auto _x1 = _o->x1;
+  auto _y1 = _o->y1;
+  auto _x2 = _o->x2;
+  auto _y2 = _o->y2;
+  auto _x3 = _o->x3;
+  auto _y3 = _o->y3;
+  auto _color_hex = _o->color_hex.empty() ? 0 : _fbb.CreateString(_o->color_hex);
+  return CreateTriangleData(
+      _fbb,
+      _x1,
+      _y1,
+      _x2,
+      _y2,
+      _x3,
+      _y3,
+      _color_hex);
+}
+
+inline LineDataT *LineData::UnPack(const ::flatbuffers::resolver_function_t *_resolver) const {
+  auto _o = std::unique_ptr<LineDataT>(new LineDataT());
+  UnPackTo(_o.get(), _resolver);
+  return _o.release();
+}
+
+inline void LineData::UnPackTo(LineDataT *_o, const ::flatbuffers::resolver_function_t *_resolver) const {
+  (void)_o;
+  (void)_resolver;
+  { auto _e = x1(); _o->x1 = _e; }
+  { auto _e = y1(); _o->y1 = _e; }
+  { auto _e = x2(); _o->x2 = _e; }
+  { auto _e = y2(); _o->y2 = _e; }
+  { auto _e = color_hex(); if (_e) _o->color_hex = _e->str(); }
+}
+
+inline ::flatbuffers::Offset<LineData> LineData::Pack(::flatbuffers::FlatBufferBuilder &_fbb, const LineDataT* _o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  return CreateLineData(_fbb, _o, _rehasher);
+}
+
+inline ::flatbuffers::Offset<LineData> CreateLineData(::flatbuffers::FlatBufferBuilder &_fbb, const LineDataT *_o, const ::flatbuffers::rehasher_function_t *_rehasher) {
+  (void)_rehasher;
+  (void)_o;
+  struct _VectorArgs { ::flatbuffers::FlatBufferBuilder *__fbb; const LineDataT* __o; const ::flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
+  auto _x1 = _o->x1;
+  auto _y1 = _o->y1;
+  auto _x2 = _o->x2;
+  auto _y2 = _o->y2;
+  auto _color_hex = _o->color_hex.empty() ? 0 : _fbb.CreateString(_o->color_hex);
+  return CreateLineData(
+      _fbb,
+      _x1,
+      _y1,
+      _x2,
+      _y2,
+      _color_hex);
 }
 
 #endif  // FLATBUFFERS_GENERATED_API_H_
